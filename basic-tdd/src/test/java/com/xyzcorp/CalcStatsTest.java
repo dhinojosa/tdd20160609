@@ -1,10 +1,11 @@
 package com.xyzcorp;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
+import org.assertj.core.data.Offset;
 import org.junit.Test;
 
 public class CalcStatsTest {
@@ -126,6 +127,72 @@ public class CalcStatsTest {
 		assertEquals(new Integer(5), result2);
 	}
 
+	@Test
+	public void testSizeOfAnEmptyArray() {
+		int[] values = {};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		Integer result2 = calcStats.getSize();
+		assertThat(result2).isEqualTo(0);
+	}
+
+	@Test
+	public void testSizeOfAnArrayOfOneElement() {
+		int[] values = {5};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		Integer result2 = calcStats.getSize();
+		assertThat(result2).isEqualTo(1);
+	}
+	
+	@Test
+	public void testSizeOfAnArrayOfFourElements() {
+		int[] values = {5, 10, 50, 32};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		Integer result2 = calcStats.getSize();
+		assertThat(result2).isEqualTo(4);
+	}
+	
+	@Test
+	public void testAverageOfAnEmptyArray() {
+		int[] values = {};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isNull();
+	}
+	
+	@Test
+	public void testAverageOfAnArrayOfOneItem() {
+		int[] values = {4};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isEqualTo(4.0);
+	}
+	
+	@Test
+	public void testAverageOfAnArrayOfTwoItems() {
+		int[] values = {4, 8};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isEqualTo(6.0);
+	}
+	
+	@Test
+	public void testAverageOfAnArrayOfTwoItemsWhereTheAvgIsntStraightForward() {
+		int[] values = {4, 7};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isEqualTo(5.5);
+	}
+	
+	@Test
+	public void testAverageOfAnArrayOfTwoItemsWhereTheAvgIsntStraightForward2() {
+		int[] values = {4, 5};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isEqualTo(4.5);
+	}
+	
+	@Test
+	public void testAverageOfAnArrayOfThreeItems() {
+		int[] values = {1,0,0};
+		CalcStats calcStats = new CalcStats(values); // Subject under test
+		assertThat(calcStats.getAverage()).isEqualTo(.333, Offset.offset(0.001));
+		assertEquals(.333, calcStats.getAverage(), 0.001);
+	}
 }
 
 

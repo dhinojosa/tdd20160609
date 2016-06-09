@@ -1,7 +1,6 @@
 package com.xyzcorp;
 
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 public class CalcStats {
 
@@ -32,5 +31,18 @@ public class CalcStats {
 
 	public Integer getMaximum() {
 		return filter((next, currentAnswer) -> next > currentAnswer);
+	}
+
+	public int getSize() {
+		return values.length;
+	}
+
+	public Double getAverage() {
+		if (getSize() == 0) return null;
+		int total = 0;
+		for (int value: values) {
+			total += value;
+		}
+		return (total + 0.0) / getSize();
 	}
 }
