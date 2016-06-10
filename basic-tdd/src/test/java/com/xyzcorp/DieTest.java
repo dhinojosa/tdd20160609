@@ -83,7 +83,8 @@ public class DieTest {
 	  Random random = createMock(Random.class);
 	  
 	  //rehearse with the mock
-	  expect(random.nextInt(anyInt())).andReturn(4);
+	  //expect(random.nextInt(anyInt())).andReturn(4);
+	  expect(random.nextInt(6)).andReturn(4);
 	  
 	  //replay
 	  replay(random);
