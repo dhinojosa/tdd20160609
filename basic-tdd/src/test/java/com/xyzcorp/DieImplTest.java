@@ -8,19 +8,20 @@ import java.util.Random;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-public class DieTest {
+public class DieImplTest {
 	
   @Test	
   @Category(value = UnitTest.class)
   public void testDieIsDefault1() {
+	  
 	  Random random = new Random() {
 		  @Override
 		  public int nextInt() {
 			  return 4;  
 		  }
-	  }; //Stub!
+	  }; //Dummy!
 	
-	 Die die = new Die(random);
+	 Die die = new DieImpl(random);
 	 assertThat(die.getPips()).isEqualTo(1);
   }
   
@@ -33,7 +34,7 @@ public class DieTest {
 			  return 3;  
 		  }
 	  }; //Stub!
-	  Die die = new Die(random); //Subject under test
+	  Die die = new DieImpl(random); //Subject under test
 	  Die rolledDie = die.roll();
 	  assertThat(rolledDie.getPips()).isEqualTo(4);
   }
@@ -47,7 +48,7 @@ public class DieTest {
 			  return 4;  
 		  }
 	  }; //Stub!
-	  Die die = new Die(random); //Subject under test
+	  Die die = new DieImpl(random); //Subject under test
 	  Die rolledDie = die.roll();
 	  assertThat(rolledDie.getPips()).isEqualTo(5);
   }
@@ -61,7 +62,7 @@ public class DieTest {
 			  return 3;  
 		  }
 	  }; //Stub!
-	  Die die = new Die(random); //Subject under test
+	  Die die = new DieImpl(random); //Subject under test
 	  Die rolledDie = die.roll().roll();
 	  assertThat(rolledDie.getPips()).isEqualTo(4);
   }
@@ -70,7 +71,7 @@ public class DieTest {
   @Category(value = IntegrationTest.class)
   public void testDieIntegration() { //This is not a unit test
 	  Random random = new Random();
-	  Die die = new Die(random);
+	  Die die = new DieImpl(random);
 	  for (int i = 0; i < 1000000; i++) {
 		assertThat(die.roll().getPips()).isGreaterThan(0).isLessThan(7);  
 	  }
@@ -89,7 +90,7 @@ public class DieTest {
 	  //replay
 	  replay(random);
 	  
-	  Die die = new Die(random); //Subject under test
+	  Die die = new DieImpl(random); //Subject under test
 	  Die rolledDie = die.roll();
 	  assertThat(rolledDie.getPips()).isGreaterThan(0).isLessThan(7);
 	  
@@ -108,7 +109,7 @@ public class DieTest {
 	  //replay
 	  replay(random);
 	  
-	  Die die = new Die(random); //Subject under test
+	  Die die = new DieImpl(random); //Subject under test
 	  Die rolledDie = die.roll();
 	  assertThat(rolledDie.getPips()).isEqualTo(1);
 	  
