@@ -6,7 +6,6 @@ public class CalcStats {
 
 	protected static final String VALUES_CANNOT_BE_NULL_MSG = "values cannot be null";
 	private int[] values;
-	// private Integer cachedMinimum;
 
 	public CalcStats(int[] values) {
 		if (values == null)
